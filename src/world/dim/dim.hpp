@@ -7,6 +7,7 @@
 #include "base/common.hpp"
 #include "chunk/chunk.hpp"
 #include "player.hpp"
+#include "nbt_tags.hpp"
 
 namespace IntServer{
 
@@ -18,10 +19,13 @@ public:
 	int id;
 	string name;
 	Difficulty difficulty;
+	nbt::tag_compound property;
 
-	Dim( int id , const string name ){
+	Dim( int id , const string name , Difficulty difficulty , const property property ){
 		this->id = id;
 		this->name = name;
+		this->difficulty = difficulty;
+		this->property = property;
 	}
 
 	Chunk& GetChunk( V2i chunkPos ){

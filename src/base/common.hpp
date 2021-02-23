@@ -54,7 +54,7 @@ enum class Gamemode : int {
 	SPECTATOR = 3
 };
 
-struct EPos{
+struct EPos{	// Entity pos
 	int worldId;
 	int dimId;
 	V3d pos;
