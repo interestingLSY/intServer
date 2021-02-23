@@ -8,7 +8,7 @@ class Player{
 public:
 	UUID uuid;
 	string name;
-	EntityPos pos;
+	EPos pos;
 	Gamemode gamemode;
 	EID eid;
 

@@ -18,9 +18,6 @@ set(HEADERS
 	src/base/network/packetReader.hpp
 	src/base/network/packetWriter.hpp
 	src/base/network/networkMain.hpp
-	src/block/block.hpp
-	src/world/chunk.hpp
-	src/player/player.hpp
 	src/world/world.hpp
    )
 

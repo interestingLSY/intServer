@@ -16,7 +16,6 @@
 #include "base/network/packetReader.hpp"
 #include "base/network/packetWriter.hpp"
 
-#include "player/player.hpp"
 #include "world/world.hpp"
 // #include "nbt_tags.h"
 
@@ -35,7 +34,7 @@ public:
 	~ClientHandler(){
 		close(clientFd);
 		if( player.uuid != 0 )	// if player.uuid is generated
-			Worlds::RemovePlayerFromAllWorlds(player.uuid);
+			UnderWhichDim(player.pos).RemovePlayer(player.uuid);
 	}
 	ClientHandler( int _clientFd , sockaddr_in *_addrClient ){
 		clientFd = _clientFd;
