@@ -22,10 +22,31 @@ public:
 		return GetDim(dimId).GetChunk(chunkPos);
 	}
 
-	void GetDimCodec(){
+	NBT GetDimTypeNBT(){
+		// see https://wiki.vg/Protocol#Join_Game
+		using namespace nbt;
+		tag_list values;
 		for( Dim &dim : dimMap ){
-
+			Debug(dim.properties);
+			tag_compound t = {
+				{"name", dim.name},
+				{"id", tag_int(dim.id)},
+				{"elements", tag_compound(dim.properties)}
+			};
+			values.push_back(tag_compound(t));
 		}
+		return NBT{
+			{"type", "minecraft:dimension_type"},
+			{"value", tag_list(values)}
+		};
+	}
+	NBT GetDimCodecNBT(){
+		// see https://wiki.vg/Protocol#Join_Game
+		using namespace nbt;
+		return NBT{
+			{"minecraft:dimension_type", GetDimTypeNBT()},
+			{"minecraft:worldgen/biome", Biomes::GetWorldgenBiomeNBT()}
+		};
 	}
 };
 
@@ -33,6 +54,15 @@ public:
 
 namespace IntServer{
 	std::vector<World> worldMap;
+	inline World& UnderWhichWorld( EPos ePos ){
+		return worldMap[ePos.worldId];
+	}
+	inline Dim& UnderWhichDim( EPos ePos ){
+		return UnderWhichWorld(ePos).dimMap[ePos.dimId];
+	}
+}
+
+namespace IntServer{
 	namespace Worlds{
 		void RegisterDefaultWorld( Difficulty difficulty ){
 			using namespace nbt;
@@ -44,7 +74,7 @@ namespace IntServer{
 						id: 0,
 						name: "overworld",
 						difficulty: difficulty,
-						property: tag_compound{
+						properties: tag_compound{
 							{"piglin_safe", tag_byte(0) },
 							{"natural", tag_byte(1) },
 							{"ambient_light", tag_float(0.0f) },
@@ -64,14 +94,5 @@ namespace IntServer{
 			});
 		}
 
-	}
-}
-
-namespace IntServer{
-	inline World& UnderWhichWorld( EPos ePos ){
-		return worldMap[ePos.worldId];
-	}
-	inline Dim& UnderWhichDim( EPos ePos ){
-		return UnderWhichWorld(ePos).dimMap[ePos.dimId];
 	}
 }

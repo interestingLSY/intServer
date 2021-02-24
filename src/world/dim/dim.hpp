@@ -19,13 +19,13 @@ public:
 	int id;
 	string name;
 	Difficulty difficulty;
-	NBT property;
+	NBT properties;
 
-	Dim( int id , const string name , Difficulty difficulty , const NBT property ){
+	Dim( int id , const string name , Difficulty difficulty , const NBT properties ){
 		this->id = id;
 		this->name = name;
 		this->difficulty = difficulty;
-		this->property = property;
+		this->properties = properties;
 	}
 
 	Chunk& GetChunk( V2i chunkPos ){

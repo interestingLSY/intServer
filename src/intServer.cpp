@@ -41,6 +41,7 @@ namespace IntServer{
 			std::thread networkMainThread(IntServer::Network::StartTCPServer,14250);
 			networkMainThread.detach();
 
+			Biomes::RegisterDefaultBiomes();
 			Worlds::RegisterDefaultWorld(Difficulty::HARD);
 
 			while(1){

@@ -13,7 +13,7 @@ enum class BiomeType : int{
 class BiomeProperties{
 public:
 	string name;
-	id id;
+	int id;
 
 	string precipitation;
 	float depth;
@@ -30,6 +30,7 @@ public:
 	// 详见 https://wiki.vg/Protocol#Join_Game
 
 	NBT GetBiomePropertiesNBT(){
+		// see https://wiki.vg/Protocol#Join_Game
 		using namespace nbt;
 		return NBT{
 			{"name", name},
@@ -71,14 +72,14 @@ Biome OCEAN;
 Biome PLAINS;
 
 void RegisterBiome( Biome &biome , BiomeType biomeType , BiomeProperties biomeProperties ){
-	biomeCount += 1;
 	const int biomeId = biomeCount;
+	biomeCount += 1;
 	biome = Biome{ type: biomeType , id: biomeId };
 	biomeProperties.id = biomeId;
 	IntServer::biomeProperties[biomeId] = biomeProperties;
 }
 
-void RegisterBiomes(){
+void RegisterDefaultBiomes(){
 	RegisterBiome(OCEAN,BiomeType::OCEAN,BiomeProperties{
 		name: "ocean",
 		precipitation: "rain",
@@ -105,6 +106,21 @@ void RegisterBiomes(){
 	    effect_fog_color: 12638463,
 	    effect_water_color: 4159204,
 	});
+}
+
+NBT GetWorldgenBiomeNBT(){
+	// see https://wiki.vg/Protocol#Join_Game
+	using namespace nbt;
+	tag_list values;
+	for( int i = 0 ; i < Biomes::biomeCount ; ++i ){
+		values.push_back(
+			tag_compound(biomeProperties[i].GetBiomePropertiesNBT())
+		);
+	}
+	return NBT{
+		{"type", "minecraft:worldgen/biome"},
+		{"value", tag_list(values)}
+	};
 }
 
 }
