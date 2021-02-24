@@ -4,7 +4,7 @@
 
 #include "base/common.hpp"
 #include "dim/dim.hpp"
-#include "nbt_tags.hpp"
+#include "nbt_tags.h"
 
 namespace IntServer{
 
@@ -23,7 +23,6 @@ public:
 	}
 
 	void GetDimCodec(){
-
 		for( Dim &dim : dimMap ){
 
 		}
@@ -57,20 +56,10 @@ namespace IntServer{
 							{"has_raids", tag_byte(1) },
 							{"logical_height", tag_int(256) },
 							{"coordinate_scale", tag_float(1.0d) },
-							{"ultrawarm": tag_byte(0) },
-							{"has_ceiling": tag_byte(0) }
+							{"ultrawarm", tag_byte(0) },
+							{"has_ceiling", tag_byte(0) }
 						}
-					},
-					// Dim{
-					// 	id: 1,
-					// 	name: "nether",
-					// 	difficulty: difficulty,
-					// },
-					// Dim{
-					// 	id: 2,
-					// 	name: "the_end",
-					// 	difficulty: difficulty,
-					// }
+					}
 				}
 			});
 		}

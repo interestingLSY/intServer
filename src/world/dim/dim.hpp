@@ -7,7 +7,7 @@
 #include "base/common.hpp"
 #include "chunk/chunk.hpp"
 #include "player.hpp"
-#include "nbt_tags.hpp"
+#include "nbt_tags.h"
 
 namespace IntServer{
 
@@ -19,9 +19,9 @@ public:
 	int id;
 	string name;
 	Difficulty difficulty;
-	nbt::tag_compound property;
+	NBT property;
 
-	Dim( int id , const string name , Difficulty difficulty , const property property ){
+	Dim( int id , const string name , Difficulty difficulty , const NBT property ){
 		this->id = id;
 		this->name = name;
 		this->difficulty = difficulty;
@@ -33,8 +33,12 @@ public:
 		return chunkMap[chunkPos];
 	}
 
-	Block& GetBlock( V3i blockPos , bool isRelativePos ){
-		return GetChunk(UnderWhichChunkCoor(blockPos)).GetBlock(blockPos,isRelativePos);
+	Block& GetBlock( V3i blockPos ){
+		return GetChunk(UnderWhichChunkCoor(blockPos)).GetBlock(blockPos);
+	}
+
+	Biome& GetBiome( V3i biomePos ){
+		return GetChunk(UnderWhichChunkCoor(biomePos)).GetBiome(biomePos);
 	}
 
 	void AddPlayer( const Player &player ){

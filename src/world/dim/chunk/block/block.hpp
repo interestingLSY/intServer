@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstring>
-
 #include "base/common.hpp"
 
 namespace IntServer{
@@ -14,7 +12,7 @@ enum class BlockType : int{
 class Block{
 public:
 	BlockType type;
-	string name;
+	string idener;
 };
 
 }
@@ -22,14 +20,17 @@ public:
 
 namespace IntServer::Blocks{
 
-Block GRASS_BLOCK = Block{
-	type: BlockType::GRASS_BLOCK,
-	name: "grass_block"
-};
+#define RegisterBlock(name,...) \
+	Block name __VA_ARGS__
 
-Block STONE = Block{
+RegisterBlock(GRASS_BLOCK,{
+	type: BlockType::GRASS_BLOCK,
+	idener: "grass_block"
+});
+
+RegisterBlock(STONE,{
 	type: BlockType::STONE,
-	name: "stone"
-};
+	idener: "stone"
+});
 
 }

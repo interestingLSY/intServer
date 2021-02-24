@@ -41,7 +41,7 @@ namespace IntServer{
 			std::thread networkMainThread(IntServer::Network::StartTCPServer,14250);
 			networkMainThread.detach();
 
-			Worlds::RegisterDefaultWorld();
+			Worlds::RegisterDefaultWorld(Difficulty::HARD);
 
 			while(1){
 				sleep(10);

@@ -11,6 +11,8 @@ public:
 	EPos pos;
 	Gamemode gamemode;
 	EID eid;
+	float yaw;
+	float pitch;
 
 	// for world.set<Player>
 	inline bool operator==( const Player &y )const{

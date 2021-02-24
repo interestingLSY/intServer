@@ -87,7 +87,7 @@ public:
 	}
 	void WriteDouble( double x ){
 		// 假设操作系统使用小端序
-		const double* addr = &x;
+		const char* addr = (char*)(&x);
 		WriteByte(*(addr+7));
 		WriteByte(*(addr+6));
 		WriteByte(*(addr+5));
@@ -99,7 +99,7 @@ public:
 	}
 	void WriteFloat( float x ){
 		// 假设操作系统使用小端序
-		const float* addr = &x;
+		const char* addr = (char*)(&x);
 		WriteByte(*(addr+3));
 		WriteByte(*(addr+2));
 		WriteByte(*(addr+1));

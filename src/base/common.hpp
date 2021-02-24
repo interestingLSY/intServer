@@ -4,10 +4,11 @@
 #include <random>
 #include <chrono>
 #include <fstream>
+#include <cstring>
 
 #include "base/io/log.hpp"
 #include "base/math/vec.hpp"
-
+#include "nbt_tags.h"
 
 namespace IntServer{
 
@@ -20,6 +21,7 @@ typedef unsigned int uint;
 typedef unsigned long long ull;
 typedef unsigned long long UUID;	// yes!
 typedef int EID;	// entity ID
+typedef nbt::tag_compound NBT;
 
 using std::string;
 
