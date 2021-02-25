@@ -1,5 +1,7 @@
 #pragma once
 
+#include "base/common.hpp"
+
 namespace IntServer{
 
 enum class ItemType : int{

@@ -4,7 +4,7 @@
 
 #include "base/common.hpp"
 #include "dim/dim.hpp"
-#include "item/item.hpp"
+#include "item/itemStackGroup.hpp"
 #include "nbt_tags.h"
 
 namespace IntServer{
