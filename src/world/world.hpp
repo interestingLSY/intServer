@@ -4,6 +4,7 @@
 
 #include "base/common.hpp"
 #include "dim/dim.hpp"
+#include "item/item.hpp"
 #include "nbt_tags.h"
 
 namespace IntServer{
@@ -50,10 +51,10 @@ public:
 	}
 };
 
+std::vector<World> worldMap;
 }
 
 namespace IntServer{
-	std::vector<World> worldMap;
 	inline World& UnderWhichWorld( EPos ePos ){
 		return worldMap[ePos.worldId];
 	}

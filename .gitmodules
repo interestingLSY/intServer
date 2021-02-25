@@ -1,3 +1,6 @@
 [submodule "src/3rdparty/libnbtplusplus"]
 	path = src/3rdparty/libnbtplusplus
 	url = https://github.com/ljfa-ag/libnbtplusplus.git
+[submodule "src/3rdparty/json"]
+	path = src/3rdparty/json
+	url = https://github.com/nlohmann/json.git

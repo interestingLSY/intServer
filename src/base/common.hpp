@@ -8,6 +8,7 @@
 
 #include "base/io/log.hpp"
 #include "base/math/vec.hpp"
+#include "config/config.hpp"
 #include "nbt_tags.h"
 
 namespace IntServer{
@@ -22,7 +23,7 @@ typedef unsigned long long ull;
 typedef unsigned long long UUID;	// yes!
 typedef int EID;	// entity ID
 typedef nbt::tag_compound NBT;
-
+using JSON = nlohmann::json;
 using std::string;
 
 void _AssertFail( const char *expression , const char *file , int line ){

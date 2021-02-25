@@ -12,8 +12,8 @@ enum class BiomeType : int{
 
 class BiomeProperties{
 public:
+	BiomeType type;
 	string name;
-	int id;
 
 	string precipitation;
 	float depth;
@@ -34,7 +34,7 @@ public:
 		using namespace nbt;
 		return NBT{
 			{"name", name},
-			{"id", tag_int(id) },
+			{"id", static_cast<int>(type) },
 			{"elements", tag_compound{
 				{"precipitation", precipitation},
 				{"depth", depth},
@@ -57,9 +57,8 @@ BiomeProperties biomeProperties[1024];
 class Biome{
 public:
 	BiomeType type;
-	int id;
 	BiomeProperties& GetProperties(){
-		return biomeProperties[id];
+		return biomeProperties[static_cast<int>(type)];
 	}
 };
 
@@ -72,15 +71,14 @@ Biome OCEAN;
 Biome PLAINS;
 
 void RegisterBiome( Biome &biome , BiomeType biomeType , BiomeProperties biomeProperties ){
-	const int biomeId = biomeCount;
-	biomeCount += 1;
-	biome = Biome{ type: biomeType , id: biomeId };
-	biomeProperties.id = biomeId;
-	IntServer::biomeProperties[biomeId] = biomeProperties;
+	++biomeCount;
+	biome = Biome{ type: biomeType };
+	biomeProperties.type = biomeType;
+	IntServer::biomeProperties[static_cast<int>(biomeType)] = biomeProperties;
 }
 
 void RegisterDefaultBiomes(){
-	RegisterBiome(OCEAN,BiomeType::OCEAN,BiomeProperties{
+	RegisterBiome(OCEAN,BiomeType::OCEAN,{
 		name: "ocean",
 		precipitation: "rain",
 		depth: -1.0f,
@@ -93,7 +91,7 @@ void RegisterDefaultBiomes(){
 		effect_fog_color: 12638463,
 		effect_water_color: 4159204
 	});
-	RegisterBiome(PLAINS,BiomeType::PLAINS,BiomeProperties{
+	RegisterBiome(PLAINS,BiomeType::PLAINS,{
 		name: "plains",
 		precipitation: "rain",
 		depth: 0.125f,

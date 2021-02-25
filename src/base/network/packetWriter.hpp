@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
@@ -104,6 +106,17 @@ public:
 		WriteByte(*(addr+2));
 		WriteByte(*(addr+1));
 		WriteByte(*(addr));
+	}
+
+	std::ostringstream os;
+	void WriteNBT( const NBT &x ){
+		nbt::io::stream_writer writer(os);
+		writer.write_payload(x);
+		byte c;
+		do{
+			os.put(c);
+			WriteByte(c);
+		}while(!os.bad());
 	}
 };
 

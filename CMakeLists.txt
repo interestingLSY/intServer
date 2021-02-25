@@ -10,6 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 include (cmake/flags.cmake)
 
 include_directories(src/3rdparty/libnbtplusplus/include)
+include_directories(src/3rdparty/json/single_include/nlohmann)
 add_subdirectory(src/3rdparty/libnbtplusplus)
 
 set(HEADERS

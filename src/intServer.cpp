@@ -11,6 +11,7 @@
 #include "world/world.hpp"
 #include "nbt_tags.h"
 #include "io/stream_reader.h"
+#include "io/stream_writer.h"
 #include "io/izlibstream.h"
 
 namespace IntServer{
@@ -38,10 +39,15 @@ namespace IntServer{
 		int main( int argc , char *argv[] ){
 			Greet();
 
+			Config::ReadConfig();
+
 			std::thread networkMainThread(IntServer::Network::StartTCPServer,14250);
 			networkMainThread.detach();
 
+			Blocks::RegisterDefaultBlocks();
 			Biomes::RegisterDefaultBiomes();
+			Items::RegisterDefaultItems();
+			
 			Worlds::RegisterDefaultWorld(Difficulty::HARD);
 
 			while(1){

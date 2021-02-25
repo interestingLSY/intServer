@@ -17,7 +17,7 @@
 #include "base/network/packetWriter.hpp"
 
 #include "world/world.hpp"
-// #include "nbt_tags.h"
+#include "nbt_tags.h"
 
 namespace IntServer::Network{
 

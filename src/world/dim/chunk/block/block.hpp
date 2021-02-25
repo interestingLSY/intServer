@@ -9,10 +9,19 @@ enum class BlockType : int{
 	STONE
 };
 
+class BlockProperties{
+public:
+	BlockType type;
+	string name;
+};
+BlockProperties blockProperties[16384];
+
 class Block{
 public:
 	BlockType type;
-	string idener;
+	BlockProperties& GetProperties(){
+		return blockProperties[static_cast<int>(type)];
+	}
 };
 
 }
@@ -20,17 +29,27 @@ public:
 
 namespace IntServer::Blocks{
 
-#define RegisterBlock(name,...) \
-	Block name __VA_ARGS__
+int blockCount = 0;
+Block GRASS_BLOCK;
+Block STONE;
 
-RegisterBlock(GRASS_BLOCK,{
-	type: BlockType::GRASS_BLOCK,
-	idener: "grass_block"
-});
+void RegisterBlock( Block &block , BlockType blockType , BlockProperties blockProperties ){
+	++blockCount;
+	block = Block{ type: blockType };
+	blockProperties.type = blockType;
+	IntServer::blockProperties[static_cast<int>(blockType)] = blockProperties;
+}
 
-RegisterBlock(STONE,{
-	type: BlockType::STONE,
-	idener: "stone"
-});
+void RegisterDefaultBlocks(){
+	RegisterBlock(GRASS_BLOCK,BlockType::GRASS_BLOCK,{
+		type: BlockType::GRASS_BLOCK,
+		name: "grass_block"
+	});
+
+	RegisterBlock(STONE,BlockType::STONE,{
+		type: BlockType::STONE,
+		name: "stone"
+	});
+}
 
 }

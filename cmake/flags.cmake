@@ -17,10 +17,10 @@ endif()
 
 if (CMAKE_CXX_COMPILER_ID MATCHES GNU)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wnarrowing")
-	set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Ofast ")
+	set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Ofast -DNDEBUG")
 
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wnarrowing -pthread")
-	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast -pthread")
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast -pthread -DNDEBUG")
 else()
 	message(FATAL_ERROR "Only GNU compilers are supported. QAQ")
 endif()
